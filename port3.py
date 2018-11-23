@@ -47,21 +47,32 @@ def convertFromJson(filename):
         data=json.loads(dataJson)
     return data
 
+def getNamesFromDic(dic):
+    return dic['name']
+def getVolFromDic(dic):
+    return dic['shares']
+
+def sortDic(dic,sort_func=getNamesFromDic):
+    dic.sort(key=sort_func)
+    return dic
+
+
 portfolio=read_portfolio(fileName,errors='silent')
-total=0
+pprint(sortDic(portfolio,sort_func=getVolFromDic))
+# total=0
 # more100=[]
 # for holding in portfolio:
 #     if holding['shares']>100:
 #         more100.append(holding)
 # pprint(more100)
 
-total=sum([holding['shares']*holding['price'] for holding in portfolio])
-print(total)
+# total=sum([holding['shares']*holding['price'] for holding in portfolio])
+# print(total)
 
-more100=[holding for holding in portfolio if holding['shares']>100]
-pprint(more100)
-names={holding['name'] for holding in portfolio }
-print(names)
+# more100=[holding for holding in portfolio if holding['shares']>100]
+# pprint(more100)
+# names={holding['name'] for holding in portfolio }
+# print(names)
 
  
 
